@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Chart } from 'chart.js';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'pb-homepage',
@@ -9,45 +10,21 @@ import { Chart } from 'chart.js';
 })
 export class HomepageComponent implements AfterViewInit {
 
-  public dataSource = {
-    datasets: [{
-        data: [],
-        backgroundColor: [
-            '#ffcd56',
-            '#ff6384',
-            '#36a2eb',
-            '#fd6b19',
-            '#f6db19',
-            '#fdbb19',
-            '#f2d6b19',
-        ],
-    }],
+  constructor(private http: HttpClient, private dataService: DataService) {
+  }
 
-    // These labels appear in the legend and in the tooltips when hovering different arcs
-    labels: []
-};
-  constructor(private http: HttpClient) { }
+  async ngAfterViewInit(): Promise<void> {
 
-  ngAfterViewInit(): void {
-    this.http.get('http://localhost:3000/budget')
-    .subscribe((res: any) => {
-      // debugger;
-      console.log(res);
-      for(var i = 0; i < res.myBudget.length; i++){
-        this.dataSource.datasets[0].data[i] = res.myBudget[i].budget;
-        this.dataSource.labels[i] = res.myBudget[i].title;
-        this.createChart();
-    }
+    await this.dataService.testData();
+    this.createChart();
 
-    });
   }
 
   createChart(){
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
         type: 'pie',
-        data: this.dataSource
+        data: this.dataService.dataSource
     });
   }
-
 }

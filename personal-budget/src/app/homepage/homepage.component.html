@@ -1,6 +1,8 @@
 <main  role="main" aria-labelledby="main"  class="container center">
 
   <div id = "main" class="page-area">
+      <pb-breadcrumbs></pb-breadcrumbs>
+
       <!-- This is a Semantic HTML Change -->
       <pb-article class="text-box">
           <h1>Stay on track </h1>
@@ -32,6 +34,7 @@
           <paragraph>
               This app is free!!! And you are the only one holding your data!
           </paragraph>
+
       </pb-article>
       <!-- This is a Semantic HTML Change -->
       <pb-article class="text-box">
@@ -63,12 +66,16 @@
       <article class="text-box">
         <h1>Chart</h1>
         <p>
-            <canvas id="myChart" width="100" height="100"></canvas>
 
+          <canvas id="myChart" width="200" height="50"></canvas>
+          <pb-pie-chart></pb-pie-chart>
         </p>
 
     </article>
 
+
   </div>
 
+
 </main>
+
