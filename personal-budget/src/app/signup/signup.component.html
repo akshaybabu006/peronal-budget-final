@@ -1,5 +1,6 @@
-<p>login works!</p>
-
+<p>signup works!</p>
+<body>
+  <main>
     <div class="row">
         <label for = "username" >username</label>
         <input type="text" name="username" id="username">
@@ -10,11 +11,12 @@
         <input type="password" name="password" id="password">
     </div>
     <div>
-      <button type="button" (click)="login()">Login</button>
-      <button [routerLink]="['/signup']" aria-label="Sign up">Go to Sign Up</button>
-      <mat-label id="result"></mat-label>
-
+      <button type="button" (click)="signup()">SignUp</button>
+      <button [routerLink]="['/']" aria-label="login">Go to login</button>
   </div>
+  <div>
+    <mat-label id="result"></mat-label>
+  </div>
+  </main>
 
-
-
+</body>

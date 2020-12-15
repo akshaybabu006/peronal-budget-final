@@ -1,0 +1,39 @@
+<pb-menu></pb-menu>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Enter new Category to be addded </mat-label>
+      <input matInput placeholder="Ex. food" id="category">
+    </mat-form-field>
+  </form>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Enter monthly budget limit for the category </mat-label>
+      <input matInput placeholder="Ex. 10" id="amount" type="number">
+
+    </mat-form-field>
+  </form>
+  <form>
+    <mat-label id="result"></mat-label>
+  </form>
+    <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Select the month </mat-label>
+            <select (change)="selectChangeHandler($event)">
+              <option value="1">Jan</option>
+              <option value="2">Feb</option>
+              <option value="3">Mar</option>
+              <option value="4">Apr</option>
+              <option value="5">May</option>
+              <option value="6">Jun</option>
+              <option value="7">Jul</option>
+              <option value="8">Aug</option>
+              <option value="9">Sep</option>
+              <option value="10">Oct</option>
+              <option value="11">Nov</option>
+              <option value="12">Dec</option>
+            </select>
+    </mat-form-field>
+  </form>
+  <div class="example-button-row">
+  <button mat-raised-button color="primary" (click)="updateExpense()">Enter Expense</button>
+  </div>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { axisBottom } from 'd3';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Router, ActivatedRoute, ParamMap, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'pb-login',
@@ -7,9 +10,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(public htttp:HttpClient,
+              private router:Router,
+              private route: ActivatedRoute) { }
 
+
+  login(){
+    console.log("entered login");
+    const username = (<HTMLInputElement>document.getElementById('username')).value;
+    const password = (<HTMLInputElement>document.getElementById('password')).value;
+
+  // console.log(data);
+  this.htttp.post<any>('http://localhost:3000/api/login?username='+username+'&password='+password,null).subscribe((res) => {
+            console.log(res)
+            console.log(res.success)
+            if(res && res.success){
+              console.log("login done");
+              localStorage.setItem('jwt', res.token);
+              localStorage.setItem('id', res.id);
+              localStorage.setItem('refreshToken', res.refreshToken);
+              this.router.navigate(['/home']);
+              (<HTMLInputElement>document.getElementById('result')).innerHTML = "login done";
+
+            }else{
+              console.log("not done");
+              (<HTMLInputElement>document.getElementById('result')).innerHTML = "";
+              (<HTMLInputElement>document.getElementById('result')).innerHTML = res.err;
+            }
+            // if(res)
+        })
+  // this.HttpClient
+  // .post('http://localhost:3000/api/login',data
+  // .subscribe)
+  // console.log(username);
+  }
   ngOnInit(): void {
   }
+
 
 }

@@ -1,6 +1,6 @@
 //Below code thought inspiration was from intex site author: Adrien Miquel.
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 export interface Item {
   name: string;
@@ -16,6 +16,7 @@ export class DataService {
   private readonly MIN_ITEM = 10;
   private readonly MAX_ITEM = 20;
   private readonly MAX_VALUE = 100;
+
 
   public dataSource = {
     datasets: [{
@@ -33,27 +34,57 @@ export class DataService {
     labels: []
   };
 
+  public dataGroupChart =[[]];
+
   constructor(private http: HttpClient) {
    }
+   public header = new HttpHeaders();
 
-  async testData(){
-    if(this.dataSource.datasets[0].data.length <= 1){
-      await this.search();
-    }
+  async testData(id:string, month:string){
+    // if(this.dataSource.datasets[0].data.length <= 1){
+    //   await this.search(id, month);
+    // }
+    await this.search(id, month);
     return this.dataSource;
   }
 
-  async search() {
+  async search(id:string, month:string) {
+    var token = localStorage.getItem('jwt');
+    this.header = this.header.set('Authorization', 'Bearer '+token);
+    console.log(this.header)
     let promise = new Promise((resolve, reject) => {
-      this.http.get('http://localhost:3000/budget')
+      console.log('id got :'+id)
+      this.http.post('http://localhost:3000/api/budget?id='+id+'&month='+month,null, {headers:this.header})
         .toPromise()
         .then(
           (res: any) => { // Success
-            for(var i = 0; i < res.myBudget.length; i++){
-              this.dataSource.datasets[0].data[i] = res.myBudget[i].budget;
-              this.dataSource.labels[i] = res.myBudget[i].title;
+            if(res.length>0){
+              for(var i = 0; i < res.length; i++){
+                this.dataSource.datasets[0].data[i] = res[i].budget;
+                this.dataSource.labels[i] = res[i].title;
+                this.dataGroupChart[i] = [res[i].title, res[i].budget, res[i].allocatedBudget];
+              }
+            }else{
+              this.dataGroupChart = [[]];
+              this.dataSource = {
+                datasets: [{
+                    data: [],
+                    backgroundColor: [
+                        '#ffcd56',
+                        '#ff6384',
+                        '#36a2eb',
+                        '#fd6b19',
+                        '#f6db19',
+                        '#fdbb19',
+                        '#f2d6b19',
+                    ],
+                }],
+                labels: []
+              };
             }
-            console.log(res);
+
+            console.log('Data from data service');
+            console.log(this.dataGroupChart);
             resolve();
           }
         );

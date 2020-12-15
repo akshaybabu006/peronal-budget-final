@@ -5,26 +5,34 @@ import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
 import { P404Component } from './p404/p404.component';
 import {ContactComponent} from './contact/contact.component';
+import {SignupComponent} from './signup/signup.component';
+import {EnterexpenseComponent} from './enterexpense/enterexpense.component';
+import {ConfigurebudgetComponent} from './configurebudget/configurebudget.component'
+// import { sign } from 'crypto';
 
 
 
 const routes: Routes = [
   {
     path: '',
-    component: HomepageComponent,
+    component: LoginComponent,
     pathMatch: 'full'
   },
   {
-    path: 'about',
-    component: AboutComponent
+    path: 'enterexpense',
+    component: EnterexpenseComponent
   },
   {
-    path: 'login',
-    component: LoginComponent
+    path: 'home',
+    component: HomepageComponent
   },
   {
-    path: 'contact',
-    component: ContactComponent
+    path: 'configurebudget',
+    component: ConfigurebudgetComponent
+  },
+  {
+    path: 'signup',
+    component: SignupComponent
   },
   {
     path: '**',

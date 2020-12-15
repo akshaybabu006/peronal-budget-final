@@ -1,74 +1,62 @@
+
 <main  role="main" aria-labelledby="main"  class="container center">
-
   <div id = "main" class="page-area">
-      <pb-breadcrumbs></pb-breadcrumbs>
-
-      <!-- This is a Semantic HTML Change -->
-      <pb-article class="text-box">
-          <h1>Stay on track </h1>
-          <paragraph>
-              Do you know where you are ssloending your money? If you really stop to track it down,
-              you would get surprised! Proper budget management depends on real data... and this
-              app will help you with that!
-          </paragraph>
-      </pb-article>
-      <!-- This is a Semantic HTML Change -->
-      <pb-article class="text-box">
-          <h1>Alerts</h1>
-          <paragraph>
-              What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
-          </paragraph>
-      </pb-article>
-      <!-- This is a Semantic HTML Change -->
-      <pb-article class="text-box">
-          <h1>Results</h1>
-          <paragraph>
-              People who stick to a financial plan, budgeting every expense, get out of debt faster!
-              Also, they to live happier lives... since they expend without guilt or fear...
-              because they know it is all good and accounted for.
-          </paragraph>
-      </pb-article>
-      <!-- This is a Semantic HTML Change -->
-      <pb-article class="text-box">
-          <h1>Free</h1>
-          <paragraph>
-              This app is free!!! And you are the only one holding your data!
-          </paragraph>
-
-      </pb-article>
-      <!-- This is a Semantic HTML Change -->
-      <pb-article class="text-box">
-          <h1>Stay on track</h1>
-          <paragraph>
-              Do you know where you are spending your money? If you really stop to track it down,
-              you would get surprised! Proper budget management depends on real data... and this
-              app will help you with that!
-          </paragraph>
-      </pb-article>
-      <!-- This is a Semantic HTML Change -->
-      <pb-article class="text-box">
-          <h1>Alerts</h1>
-          <paragraph>
-              What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
-          </paragraph>
-      </pb-article>
-      <!-- This is a Semantic HTML Change -->
-      <pb-article class="text-box">
-          <h1>Results</h1>
-          <paragraph>
-              People who stick to a financial plan, budgeting every expense, get out of debt faster!
-              Also, they to live happier lives... since they expend without guilt or fear...
-              because they know it is all good and accounted for.
-          </paragraph>
-
-      </pb-article>
+      <pb-menu></pb-menu>
+      <!-- <h2 mat-dialog-title>{{modalTitle}}</h2>
+      <ng-template #firstDialog>
+      <mat-dialog-content>Do you wish to continue previous shopping?</mat-dialog-content>
+      <mat-dialog-actions>
+      <button mat-button mat-dialog-close>No</button>
+      <button mat-button [mat-dialog-close]=”true”>Yes</button>
+      </mat-dialog-actions>
+      </ng-template> -->
+      <!-- <ng-template #firstDialog>
+        <h2 matDialogTitle>Hello, world!</h2>
+        <p matDialogContent><em>Content for this dialog goes here...</em></p>
+        <mat-dialog-actions>
+          <button mat-button matDialogClose>Dismiss</button>
+        </mat-dialog-actions>
+      </ng-template> -->
       <!-- This is a Semantic HTML Change -->
       <article class="text-box">
+        <div>
+          <h2><span>Month</span></h2>
+            <select (change)="selectChangeHandler($event)">
+              <option value="1">Jan</option>
+              <option value="2">Feb</option>
+              <option value="3">Mar</option>
+              <option value="4">Apr</option>
+              <option value="5">May</option>
+              <option value="6">Jun</option>
+              <option value="7">Jul</option>
+              <option value="8">Aug</option>
+              <option value="9">Sep</option>
+              <option value="10">Oct</option>
+              <option value="11">Nov</option>
+              <option value="12">Dec</option>
+            </select>
+
+        </div>
         <h1>Chart</h1>
         <p>
 
           <canvas id="myChart" width="200" height="50"></canvas>
-          <pb-pie-chart></pb-pie-chart>
+
+        </p>
+        <div id="pie"><svg></svg></div>
+        <p>
+          <!-- <pb-pie-chart></pb-pie-chart> -->
+          <!-- <pb-stackedbarchart></pb-stackedbarchart> -->
+
+          <google-chart #chart
+              [title]="title"
+              [type]="type"
+              [data]="dataChart"
+              [columnNames]="columnNames"
+              [options]="options"
+              [width]="widths"
+              [height]="heights">
+          </google-chart>
         </p>
 
     </article>

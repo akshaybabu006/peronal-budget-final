@@ -15,6 +15,13 @@ import { P404Component } from './p404/p404.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { ContactComponent } from './contact/contact.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { LogoutComponent } from './logout/logout.component';
+import { SignupComponent } from './signup/signup.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ConfigurebudgetComponent } from './configurebudget/configurebudget.component';
+import { EnterexpenseComponent } from './enterexpense/enterexpense.component';
+import { StackedbarchartComponent } from './stackedbarchart/stackedbarchart.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 @NgModule({
   declarations: [
@@ -29,11 +36,18 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
     P404Component,
     BreadcrumbsComponent,
     ContactComponent,
-    PieChartComponent
+    PieChartComponent,
+    LogoutComponent,
+    SignupComponent,
+    DashboardComponent,
+    ConfigurebudgetComponent,
+    EnterexpenseComponent,
+    StackedbarchartComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    GoogleChartsModule,
     AppRoutingModule
   ],
   providers: [],

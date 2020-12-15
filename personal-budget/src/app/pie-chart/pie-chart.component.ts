@@ -3,6 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Item, DataService } from '../data.service';
 import * as d3 from 'd3';
 import { HttpClient } from '@angular/common/http';
+import { HomepageComponent } from '../homepage/homepage.component';
 
 
 @Component({
@@ -28,12 +29,14 @@ export class PieChartComponent implements OnInit {
   private arcLabel: any;
   private texts: any;
 
-  constructor(private dataService: DataService, private http: HttpClient) {
+  constructor(private dataService: DataService,
+              private http: HttpClient,
+              private homeComponent: HomepageComponent) {
   }
 
   async ngOnInit(): Promise<void> {
     const temp = [];
-    await this.dataService.testData();
+    await this.dataService.testData('2',this.homeComponent.selectedMonth); //sdjfksjdf skdjf kjdfjasdf sfkjskfd
     for(var i= 0; i < this.dataService.dataSource.labels.length ; i++){
       temp.push({
         name: this.dataService.dataSource.labels[i],
