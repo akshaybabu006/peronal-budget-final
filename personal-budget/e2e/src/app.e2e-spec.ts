@@ -1,16 +1,36 @@
 import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import { browser, logging, element, by } from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
+
   });
 
-  it('should display welcome message', () => {
+  it('should display title personal budget', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('personal-budget app is running!');
+    var welcomeMessage = element.all(by.tagName('h1'));
+    expect(welcomeMessage.getText()).toContain("Personal Budget");
+  });
+
+  it('should display login button', () => {
+    page.navigateTo();
+    var welcomeMessage = element.all(by.tagName('button'));
+    expect(welcomeMessage.get(0).getText()).toContain("Login");
+  });
+
+  it('should display go to sign up button', () => {
+    page.navigateTo();
+    var welcomeMessage = element.all(by.tagName('button'));
+    expect(welcomeMessage.get(1).getText()).toContain("Go to Sign Up");
+  });
+
+  it('should display username label', () => {
+    page.navigateTo();
+    var welcomeMessage = element.all(by.tagName('label'));
+    expect(welcomeMessage.get(0).getText()).toContain("username");
   });
 
   afterEach(async () => {

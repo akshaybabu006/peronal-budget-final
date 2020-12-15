@@ -22,4 +22,11 @@ describe('MenuComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it(`should have a Dashboard`, () => {
+    const fixture = TestBed.createComponent(MenuComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('li').textContent).toContain('Dashboard');
+  });
 });
