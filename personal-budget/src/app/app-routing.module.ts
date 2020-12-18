@@ -8,6 +8,7 @@ import {ContactComponent} from './contact/contact.component';
 import {SignupComponent} from './signup/signup.component';
 import {EnterexpenseComponent} from './enterexpense/enterexpense.component';
 import {ConfigurebudgetComponent} from './configurebudget/configurebudget.component'
+import {LogoutComponent} from './logout/logout.component';
 // import { sign } from 'crypto';
 
 
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignupComponent
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent
   },
   {
     path: '**',

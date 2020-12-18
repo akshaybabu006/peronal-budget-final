@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pb-enterexpense',
@@ -9,12 +9,13 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 })
 export class EnterexpenseComponent implements OnInit {
   selectedMonth: string = '1';
-  userId: string = '2';
+  userId: string = localStorage.getItem('id');
 
   txtValue:string = '';
   message : string;
   public header = new HttpHeaders();
-  constructor(public htttp:HttpClient) { }
+  constructor(public htttp:HttpClient,
+              private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -44,8 +45,12 @@ export class EnterexpenseComponent implements OnInit {
 
             }else{
               console.log("Expense not updated");
-              (<HTMLInputElement>document.getElementById('result')).innerHTML = "Expense not updated for the category, may be category not added for particular month";
+              (<HTMLInputElement>document.getElementById('result')).innerHTML = "Expense not updated for the category, may be category not added for particular month in configure budget";
             }
+        }, (err)=>{
+          if(err.status=='400'){
+            this.router.navigate(['/abc']);
+          }
         })
     }
   }

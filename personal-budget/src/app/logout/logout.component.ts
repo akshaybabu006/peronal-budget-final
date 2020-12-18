@@ -10,6 +10,10 @@ export class LogoutComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+                localStorage.removeItem('jwt');
+                localStorage.removeItem('refreshToken');
+                localStorage.removeItem('id');
+                window.location.href = '/';
   }
 
 }

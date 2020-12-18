@@ -1,6 +1,7 @@
 //Below code thought inspiration was from intex site author: Adrien Miquel.
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { Router } from '@angular/router';
 
 export interface Item {
   name: string;
@@ -36,14 +37,12 @@ export class DataService {
 
   public dataGroupChart =[[]];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private router:Router) {
    }
    public header = new HttpHeaders();
 
   async testData(id:string, month:string){
-    // if(this.dataSource.datasets[0].data.length <= 1){
-    //   await this.search(id, month);
-    // }
     await this.search(id, month);
     return this.dataSource;
   }
@@ -87,7 +86,12 @@ export class DataService {
             console.log(this.dataGroupChart);
             resolve();
           }
-        );
+        ), (err)=>{
+          console.log('came in chart error api')
+          if(err.status=='400'){
+            this.router.navigate(['/abc']);
+          }
+        };
     });
     return promise;
   }

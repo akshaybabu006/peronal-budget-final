@@ -1,22 +1,21 @@
-<p>signup works!</p>
-<body>
-  <main>
-    <div class="row">
-        <label for = "username" >username</label>
-        <input type="text" name="username" id="username">
-    </div>
+<form class="container center">
+    <main class="page-area">
+      <div class="row">
+          <label for = "username" aria-label="username"><b>username</b></label>
+          <input type="text" name="username" id="username" aria-label="username">
+      </div>
 
-    <div class = "row">
-        <label for ="password">password</label>
-        <input type="password" name="password" id="password">
+      <div class = "row">
+          <label for ="password" aria-label="password"><b>password</b></label>
+          <input type="password" name="password" id="password" aria-label="password">
+      </div>
+      <div>
+        <button type="button" (click)="signup()" aria-label="sign up" aria-describedby="result">SignUp</button>
+        <button type="button" [routerLink]="['/']" aria-label="login" aria-label="go to login">Go to login</button>
     </div>
     <div>
-      <button type="button" (click)="signup()">SignUp</button>
-      <button [routerLink]="['/']" aria-label="login">Go to login</button>
-  </div>
-  <div>
-    <mat-label id="result"></mat-label>
-  </div>
-  </main>
+      <label id="result"></label>
+    </div>
+    </main>
+</form>
 
-</body>

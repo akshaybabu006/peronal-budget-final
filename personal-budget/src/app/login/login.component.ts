@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { axisBottom } from 'd3';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap, RouterModule } from '@angular/router';
 
 @Component({
@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
 
   // console.log(data);
   this.htttp.post<any>('http://localhost:3000/api/login?username='+username+'&password='+password,null).subscribe((res) => {
+            console.log('Inside api login call')
             console.log(res)
             console.log(res.success)
             if(res && res.success){
@@ -38,7 +39,10 @@ export class LoginComponent implements OnInit {
               (<HTMLInputElement>document.getElementById('result')).innerHTML = res.err;
             }
             // if(res)
-        })
+        },(err)=>{console.log('Inside api erro login call')
+        console.log(err.status);
+        (<HTMLInputElement>document.getElementById('result')).innerHTML = "";
+        (<HTMLInputElement>document.getElementById('result')).innerHTML = err.error.err;})
   // this.HttpClient
   // .post('http://localhost:3000/api/login',data
   // .subscribe)

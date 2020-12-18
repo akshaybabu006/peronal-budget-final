@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pb-configurebudget',
@@ -8,9 +9,10 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 })
 export class ConfigurebudgetComponent implements OnInit {
   selectedMonth: string = '1';
-  userId: string = '2';
+  userId: string = localStorage.getItem('id');
   public header = new HttpHeaders();
-  constructor(public htttp:HttpClient) { }
+  constructor(public htttp:HttpClient,
+              private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -24,7 +26,7 @@ export class ConfigurebudgetComponent implements OnInit {
     this.header = this.header.set('Authorization', 'Bearer '+token);
     const category = (<HTMLInputElement>document.getElementById('category')).value;
     const amount = (<HTMLInputElement>document.getElementById('amount')).value;
-    // const result = (<HTMLInputElement>document.getElementById('result')).value;
+    const result = (<HTMLInputElement>document.getElementById('result')).value;
     if(category == '' || amount==''){
       (<HTMLInputElement>document.getElementById('result')).innerHTML = "One of the text field is empty";
     }else{
@@ -40,6 +42,10 @@ export class ConfigurebudgetComponent implements OnInit {
               console.log("Unable to add new category");
               (<HTMLInputElement>document.getElementById('result')).innerHTML = "Unable to add new category";
             }
+        }, (err)=>{
+          if(err.status=='400'){
+            this.router.navigate(['/abc']);
+          }
         })
     }
   }

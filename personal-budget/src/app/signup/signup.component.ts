@@ -19,24 +19,25 @@ export class SignupComponent implements OnInit {
     console.log("entered signup");
     const username = (<HTMLInputElement>document.getElementById('username')).value;
     const password = (<HTMLInputElement>document.getElementById('password')).value;
+    if(username == '' || password ==''){
+      (<HTMLInputElement>document.getElementById('result')).innerHTML = "One of the text field is empty";
+    }else{
+      this.htttp.post<any>('http://localhost:3000/api/signup?username='+username+'&password='+password,null).subscribe((res) => {
+        console.log(res)
+        if(res && res.success){
+          console.log("sign up done");
+          (<HTMLInputElement>document.getElementById('result')).innerHTML = "Sign up done please go to login";
 
+        }else{
+          console.log("not done signup error");
+          (<HTMLInputElement>document.getElementById('result')).innerHTML = "";
+          (<HTMLInputElement>document.getElementById('result')).innerHTML = res.err;
+        }
+
+    })
+    }
   // console.log(data);
-  this.htttp.post<any>('http://localhost:3000/api/signup?username='+username+'&password='+password,null).subscribe((res) => {
-            console.log(res)
-            if(res && res.success){
-              console.log("sign up done");
-              (<HTMLInputElement>document.getElementById('result')).innerHTML = "Sign up done please go to login";
 
-            }else{
-              console.log("not donesignup error");
-              (<HTMLInputElement>document.getElementById('result')).innerHTML = "";
-              (<HTMLInputElement>document.getElementById('result')).innerHTML = res.err;
-            }
-            // if(res)
-        })
-  // this.HttpClient
-  // .post('http://localhost:3000/api/login',data
-  // .subscribe)
   console.log(username);
   }
 

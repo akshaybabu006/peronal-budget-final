@@ -91,6 +91,8 @@ export class HomepageComponent implements AfterViewInit {
     await this.dataService.testData(this.userId,this.selectedMonth);
     this.createChart();
     this.createPieChart();
+    // this.dataChart.push( this.dataService.dataGroupChart );
+    // this.dataChart = Object.assign( [], this.dataService.dataGroupChart);
     this.checkTimer();
 
 
