@@ -1,3 +1,3 @@
 # Info
-Project is inside angular project
+Angular Project is inside personal-budget folder
 
